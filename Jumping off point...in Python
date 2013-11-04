@@ -1,0 +1,36 @@
+##skin values[
+#skinz[
+###create array/hash? of skin tones in RGB
+#]
+
+
+print 'hello world.'
+x = 1
+y = 2
+
+import Image                                        #loading library file
+im = Image.open("/home/aurthur/Pictures/pic.jpg")   #open this image
+pix = im.load()
+
+
+size = im.size                                      #size of image in pixels
+print "Size: ", size
+width, height = im.size                             #setting width+height variables via size function
+
+print "Pixel (1,2) value RGB:"                            #print a random pixel's RGB value
+print pix[x,y]
+
+
+test = (179, 204, 235)                              #took the out put of the pixel value and just made sure I could
+if test == pix[x,y]:                                #compare in the same format, (x,y,z) == (a,b,c)
+	print "Match"
+else:
+	print "Not Match"
+
+####
+#Loop through pix[x,y] where x and y are image size (width/height)
+#If pix[x,y] == +/- 5ish RGB of any skinz in list, increment count
+#if count divided by (width * height) = % we come up with, flag image
+#####
+
+#Also need a way to read in files from directory
