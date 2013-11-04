@@ -12,12 +12,13 @@ image.
 
 
 Usage:
-To begin you must have Python installed!  
-Run the SkinTerrogate Python script
-SkinTerrogate will ask you to enter in the directory you wish to crawl for Images
-Enter in format: /<directory>/<directory>/<targetdirectory>
-For Windows: C:\<directory>\<targetdirectory>
-Sit back and wait for SkinTerrogate to identify possible pornographic images
+-To begin you must have Python installed! 
+-You must then make sure you have the PIL python library installed as well
+-Run the SkinTerrogate Python tool
+-SkinTerrogate will ask you to enter in the directory you wish to crawl for Images
+-Enter in format: /<directory>/<directory>/<targetdirectory>
+-For Windows: C:\<directory>\<targetdirectory>
+-Sit back and wait for SkinTerrogate to identify possible pornographic images
 
 
 
