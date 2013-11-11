@@ -1,0 +1,80 @@
+##skin values[
+#skinz[
+#lt. Caucasian (247,217,214)
+#Caucasian (240,186,173)
+#dk. Caucasian (212,128,107)
+#Asian[wide range] (235,178,133)
+#lt. Black (195, 116, 77)
+#dk Black (69,42,29)  
+#skinz[
+lc = {'r': 247, 'g': 217, 'b': 214}		#create a bunch of skin tone values in dictionarys
+c = {'r': 240,'g': 186,'b':173}				#the keys are 'r','g','b'
+dc = {'r':212,'g':128,'b':107}
+asian = {'r':235,'g':178,'b':133}
+lb = {'r':195,'g':116,'b':77}
+db = {'r':69,'g':42,'b':29}
+#]
+
+
+print 'hello world.'
+a = 0
+b = 1
+
+import Image                                        #loading library file
+im = Image.open("/home/moot/Pictures/pic.jpg")   #open this image
+pix = im.load()
+
+
+size = im.size                                      #size of image in pixels
+print "Size: ", size
+width, height = im.size                             #setting width+height variables via size function
+
+
+print "Pixel (0,2) value RGB: ", pix[a,b]           #print a random pixel's RGB value
+
+
+test = (179, 204, 235)                              #took the output of the pixel value and just made sure I could
+print "Test: ", test				    	                  #compare in the same format, (x,y,z) == (a,b,c)
+if test == pix[a,b]:                                
+  print "Match"
+else:
+  print "Not Match"
+
+#test just adding pixels to given value does not work
+#testadd = test + (20, 10, 20)
+#print "This is test add;", testadd, " <--"
+
+all_pixels = []					        #get an array, called all_pixels, of all pixel values	
+for x in range(width):					
+    for y in range(height):
+        cpixel = pix[x, y]
+        all_pixels.append(cpixel)			#add pixel to array thus: [[r,g,b], [r,g,b], [r,g,b]]
+							                      	#became array with arrays inside
+
+
+keys = ['x', 'y', 'z']				                	#Create hash(Dictionary in perl)					
+testdict = dict(zip(keys, zip(*all_pixels)))		#maps x, y, z key to r, g, b values in all_pixels array
+						                                  	#new dictionary is made with all values mapped
+						                                    #can create +/- test easily to r, g, and b
+
+fox x in range (-10, 10):
+	if (testdict[x] ==  
+
+
+#Huge outputs(just to test)...need to output to file
+#and 'more filename' or else editor crashes
+	#print "testdict['x']: ", testdict['x'];
+	#print all_pixels
+
+
+
+
+
+
+####
+#Loop through pix[x,y] where x and y are image size (width/height)
+#If pix[x,y] == +/- 5ish RGB of any skinz in list, increment count
+#if count divided by (width * height) = % we come up with, flag image
+####
+
+#Also need a way to read in files from directory
