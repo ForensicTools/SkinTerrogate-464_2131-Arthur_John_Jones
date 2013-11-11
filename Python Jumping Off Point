@@ -1,6 +1,17 @@
 ##skin values[
+#lt. Caucasian (247,217,214)
+#Caucasian (240,186,173)
+#dk. Caucasian (212,128,107)
+#Asian[wide range] (235,178,133)
+#lt. Black (195, 116, 77)
+#dk Black (69,42,29)  
 #skinz[
-###create array/hash? of skin tones in RGB
+lt-cac = [247,217,214]
+cac = [240,186,173]
+dk-cac = [212,128,107]
+asian = [235,178,133]
+lt-blk = [195,116,77]
+dk-blk = [69,42,29]
 #]
 
 
