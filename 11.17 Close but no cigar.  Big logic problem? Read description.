@@ -8,7 +8,7 @@
 #dk Black (69,42,29)  
 
 lc = {'r': 247, 'g': 217, 'b': 214}		#create a bunch of skin tone values in dictionarys
-c = {'r': 240,'g': 186,'b':173}				#the keys are 'r','g','b'
+c = {'r': 240,'g': 186,'b':173}			#the keys are 'r','g','b'
 dc = {'r':212,'g':128,'b':107}
 asian = {'r':235,'g':178,'b':133}
 lb = {'r':195,'g':116,'b':77}
@@ -40,7 +40,7 @@ print "Pixel (0,2) value RGB: ", pix[a,b]           #print a random pixel's RGB 
 
 
 test = (179, 204, 235)                              #took the output of the pixel value and just made sure I could
-print "Test: ", test				    	                  #compare in the same format, (x,y,z) == (a,b,c)
+print "Test: ", test				    #compare in the same format, (x,y,z) == (a,b,c)
 if test == pix[a,b]:                                
   print "Match"
 else:
@@ -50,18 +50,18 @@ else:
 #testadd = test + (20, 10, 20)
 #print "This is test add;", testadd, " <--"
 
-all_pixels = []					                            #get an array, called all_pixels, of all pixel values	
+all_pixels = []					                      #get an array, called all_pixels, of all pixel values	
 for x in range(width):					
     for y in range(height):
         cpixel = pix[x, y]
         all_pixels.append(cpixel)			              #add pixels to array (all_pixels) thus: [[r,g,b], [r,g,b], [r,g,b]]
-							                                      #becomes array with arrays inside
+							              #becomes array with arrays inside
 
 
-keys = ['x', 'y', 'z']					                    #Create hash(Dictionary in perl) key values					
+keys = ['x', 'y', 'z']					    #Create hash(Dictionary in perl) key values					
 testdict = dict(zip(keys, zip(*all_pixels)))		    #maps x, y, z key in testdict to r, g, b values in all_pixels array
-							                                      #new dictionary is made with all values mapped x=r y=g z=b
-							                                      #can create +/- test more easily now
+							    #new dictionary is made with all values mapped x=r y=g z=b
+							    #can create +/- test more easily now
 
 
 
