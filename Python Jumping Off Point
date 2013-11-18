@@ -1,6 +1,17 @@
 ##skin values[
+#lt. Caucasian (247,217,214)
+#Caucasian (240,186,173)
+#dk. Caucasian (212,128,107)
+#Asian[wide range] (235,178,133)
+#lt. Black (195, 116, 77)
+#dk Black (69,42,29)  
 #skinz[
-###create array/hash? of skin tones in RGB
+lt-cac = [247,217,214]
+cac = [240,186,173]
+dk-cac = [212,128,107]
+asian = [235,178,133]
+lt-blk = [195,116,77]
+dk-blk = [69,42,29]
 #]
 
 
@@ -32,5 +43,15 @@ else:
 #If pix[x,y] == +/- 5ish RGB of any skinz in list, increment count
 #if count divided by (width * height) = % we come up with, flag image
 ####
-
+for h in hrange (1, height)        #this for loop should get us each pixel in the image. It reads row by row, incrementing the height value after it reads the entire width of the row.
+	for w in wrange (1, width)
+		thispix = pix[h,w]
+		#make pixel comparison (can we make an array of arrays? not sure the syntax to do this in python. Like if we could get each array of skin tones in an array called skinz[]
+		#essentially what we need is { foreach element in skinz[] 
+		#									if ((thispix[0] >= (element[0]-5) && thispix[0] <= (element[0]+5)) && (thispix[1] >= (element[1]-5) && thispix[0] <= (element[1]+5)) &&
+		#									(thispix[2] >= (element[2]-5) && thispix[2] <= (element[1]+5))
+		#                              then: skin = true
+		#                            }
+		#I'll keep looking into getting this syntax sorted out. That is a hella long if-statement.
+		
 #Also need a way to read in files from directory
