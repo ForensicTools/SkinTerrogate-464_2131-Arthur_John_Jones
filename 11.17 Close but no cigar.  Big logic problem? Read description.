@@ -1,0 +1,110 @@
+##skin values[
+#skinz[
+#lt. Caucasian (247,217,214)
+#Caucasian (240,186,173)
+#dk. Caucasian (212,128,107)
+#Asian[wide range] (235,178,133)
+#lt. Black (195, 116, 77)
+#dk Black (69,42,29)  
+
+lc = {'r': 247, 'g': 217, 'b': 214}		#create a bunch of skin tone values in dictionarys
+c = {'r': 240,'g': 186,'b':173}				#the keys are 'r','g','b'
+dc = {'r':212,'g':128,'b':107}
+asian = {'r':235,'g':178,'b':133}
+lb = {'r':195,'g':116,'b':77}
+db = {'r':69,'g':42,'b':29}
+
+#white tones
+w1 = {'r':245,'g':245,'b':245}
+w2 = {'r':190,'g':105,'b':85}
+w3 = {'r':129,'g':63,'b':49}
+w4 = {'r':250,'g':217,'b':160}
+
+
+print 'hello world.'
+a = 0
+b = 1
+count = 0
+
+import Image                                        #loading library file
+im = Image.open("/home/moot/Pictures/pic.jpg")      #open this image
+pix = im.load()
+
+
+size = im.size                                      #size of image in pixels
+print "Size: ", size
+width, height = im.size                             #setting width+height variables via size function
+
+
+print "Pixel (0,2) value RGB: ", pix[a,b]           #print a random pixel's RGB value
+
+
+test = (179, 204, 235)                              #took the output of the pixel value and just made sure I could
+print "Test: ", test				    	                  #compare in the same format, (x,y,z) == (a,b,c)
+if test == pix[a,b]:                                
+  print "Match"
+else:
+  print "Not Match"
+
+#test just adding pixels to given value does not work
+#testadd = test + (20, 10, 20)
+#print "This is test add;", testadd, " <--"
+
+all_pixels = []					                            #get an array, called all_pixels, of all pixel values	
+for x in range(width):					
+    for y in range(height):
+        cpixel = pix[x, y]
+        all_pixels.append(cpixel)			              #add pixels to array (all_pixels) thus: [[r,g,b], [r,g,b], [r,g,b]]
+							                                      #becomes array with arrays inside
+
+
+keys = ['x', 'y', 'z']					                    #Create hash(Dictionary in perl) key values					
+testdict = dict(zip(keys, zip(*all_pixels)))		    #maps x, y, z key in testdict to r, g, b values in all_pixels array
+							                                      #new dictionary is made with all values mapped x=r y=g z=b
+							                                      #can create +/- test more easily now
+
+
+
+for xspread in range (-20, 20):
+	for yspread in range(-20, 20):
+		for zspread in range (-20, 20):
+			#print "Spread1",xspread
+			#print "Spread2",yspread
+			#print "Spread3",zspread
+			#print "/n"
+			if testdict['x'] == lc['r'] + xspread and testdict['y'] == lc['g'] + yspread and testdict['z'] == lc['b'] + zspread:
+				count = count + 1
+			if testdict['x'] == w1['r'] + xspread and testdict['y'] == w1['g'] + yspread and testdict['z'] == w1['b'] + zspread:
+				count = count + 1
+			if testdict['x'] == w2['r'] + xspread and testdict['y'] == w2['g'] + yspread and testdict['z'] == w2['b'] + zspread:
+				count = count + 1
+			if testdict['x'] == w3['r'] + xspread and testdict['y'] == w3['g'] + yspread and testdict['z'] == w3['b'] + zspread:
+				count = count + 1
+			if testdict['x'] == w4['r'] + xspread and testdict['y'] == w4['g'] + yspread and testdict['z'] == w4['b'] + zspread:
+				count = count + 1			
+print "THE FREAKING COUNT IS:", count
+
+
+
+
+
+
+
+
+#Huge outputs(just to test)...need to output to file
+#and 'more filename' or else editor crashes
+	#print "testdict['x']: ", testdict['x'];
+	#print all_pixels
+
+
+
+
+
+
+####
+#Loop through pix[x,y] where x and y are image size (width/height)
+#If pix[x,y] == +/- 5ish RGB of any skinz in list, increment count
+#if count divided by (width * height) = % we come up with, flag image
+####
+
+#Also need a way to read in files from directory
