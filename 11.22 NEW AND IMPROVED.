@@ -1,0 +1,83 @@
+#!/usr/bin/python
+import Image
+
+
+
+
+
+def pixfun(pix):
+	spread = 5
+	for color in colours:
+		if pix[0]<=(color[0] + spread) and pix[0]>=(color[0] - spread) \
+			and pix[1]<=(color[1] + spread) and pix[1]>=(color[1] - spread) \
+				and pix[2]<=(color[2] + spread) and pix[2]>=(color[2] - spread):
+			return 1
+
+
+
+img = Image.open("/home/moot/Pictures/porn.jpg")
+pix = img.load()
+
+width, height = img.size #Image size
+
+pixels = tuple(img.getdata())
+
+
+
+#colour dictionary
+colours = {
+	(245, 245, 245): 'w1',
+	(190, 105, 85):	 'w2',
+	(129, 63, 49):	'w3',
+	(250, 217, 160): 'w4',
+	(247, 217, 214): 'lc',
+	(240, 186, 173): 'c',
+	(212, 128, 107): 'dc',
+	(235, 178, 133): 'asian',
+	(195, 116,  77): 'lb',
+	(69,  42,  29): 'db',
+	(45, 34, 30): 'db1',
+	(60, 46, 40): 'db2',
+	(75, 57, 50): 'db3',
+	(90, 69, 60): 'db4',
+	(105, 80, 70): 'db5',
+	(120, 92, 80): 'db6',
+	(135, 103, 90): 'db7',
+	(150, 114, 100): 'db8',
+	(165, 126, 110): 'db9',
+	(180, 138, 120): 'db10',
+	(195, 149, 130): 'db11',
+	(210, 161, 140): 'db12',
+	(225, 172, 150): 'db13',
+	(240, 184, 160): 'db14',
+	(255, 195, 170): 'db15',
+	(255, 206, 180): 'db16',
+	(255, 218, 190): 'db17',
+	(255, 229, 200): 'db17',
+		
+	(0,   0,   0): 'test'
+	
+}
+
+colour_type = colours.get(pixels, 'no match') 
+
+
+match = 0 #default value
+
+for x in pixels:
+#	print pixel #used to ensure pixels are in the (x, x ,x) format
+#	colour_type = colours.get(pixel, 'no match')
+#	print colour_type #printing either 'no match' or one of the dictionary names(w1,c,asian)
+#	if(colour_type != 'no match'):
+#		match = match + 1 #For every matched pixel, + 1
+
+#	if(match >= 5):
+#		"We have enough evidence to prove this______"
+#		break
+
+	pron = pixfun(x)
+	if pron == 1:
+		match = match + 1
+
+print "Matches", match
+print "Total Pixels:", len(pixels)
