@@ -4,7 +4,11 @@ import Image
 
 
 
-
+#Spread function.
+#Checks each item from colours dictionary (Skin tones we flag as 'porn')
+#Checks each element of color dictionary separately, further divides
+#each element by r-g-b
+#each element divided by tuple split 
 def pixfun(pix):
 	spread = 5
 	for color in colours:
@@ -20,7 +24,7 @@ pix = img.load()
 
 width, height = img.size #Image size
 
-pixels = tuple(img.getdata())
+pixels = tuple(img.getdata())  #grab all pixel values and put into a list of tuples
 
 
 
@@ -35,6 +39,7 @@ colours = {
 	(212, 128, 107): 'dc',
 	(235, 178, 133): 'asian',
 	(195, 116,  77): 'lb',
+	#############
 	(69,  42,  29): 'db',
 	(45, 34, 30): 'db1',
 	(60, 46, 40): 'db2',
@@ -53,7 +58,40 @@ colours = {
 	(255, 195, 170): 'db15',
 	(255, 206, 180): 'db16',
 	(255, 218, 190): 'db17',
-	(255, 229, 200): 'db17',
+	(255, 229, 200): 'db18',
+###############
+	(255,223,196): 'db181',
+	(240,213,190): 'db182',
+	(238,206,179): 'db183',
+	(225,184,153): 'db184',
+	(229,194,152): 'db185',
+	(255,220,178): 'db186',
+	(229,184,143): 'db187',
+	(229,160,115): 'db188',
+	(231,158,109): 'db189',
+	(219,144,101): 'db1810',
+	(206,150,124): 'db1811',
+	(198,120,86): 'db1812',
+	(186,108,73): 'db1813',
+	(165,114,87): 'db1814',
+	(240,200,201): 'db1815',
+	(221,168,160): 'db1816',
+	(185,124,109): 'db1817',
+	(168,117,108): 'db1818',
+	(173,100,82): 'db1819',
+	(92,56,54): 'db1820',
+	(203,132,66): 'db1821',
+	(189,114,60): 'db1822',
+	(112,65,57): 'db1823',
+	(163,134,106): 'db1824',
+	(135,4,0): 'db1825',
+	(113,1,1): 'db1826',
+	(67,0,0): 'db1827',
+	(91,0,1): 'db1828',
+	(48,46,46): 'db1829',
+	(0,0,0): 'db1820',
+	######################
+	
 		
 	(0,   0,   0): 'test'
 	
