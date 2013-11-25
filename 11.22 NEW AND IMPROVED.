@@ -19,16 +19,19 @@ def pixfun(pix):
 
 
 
+			
+# Load image
 img = Image.open("/home/moot/Pictures/porn.jpg")
 pix = img.load()
 
+#size of image put into variables width/height
 width, height = img.size #Image size
 
-pixels = tuple(img.getdata())  #grab all pixel values and put into a list of tuples
+pixels = tuple(img.getdata())  #grab all pixel values of image loaded and put into a list of tuples
 
 
 
-#colour dictionary
+#colour dictionary of skin tones
 colours = {
 	(245, 245, 245): 'w1',
 	(190, 105, 85):	 'w2',
@@ -40,6 +43,7 @@ colours = {
 	(235, 178, 133): 'asian',
 	(195, 116,  77): 'lb',
 	#############
+##http://www.makehuman.org/forum/viewtopic.php?f=8&t=1529	
 	(69,  42,  29): 'db',
 	(45, 34, 30): 'db1',
 	(60, 46, 40): 'db2',
@@ -60,6 +64,8 @@ colours = {
 	(255, 218, 190): 'db17',
 	(255, 229, 200): 'db18',
 ###############
+##http://www.erdemyilmaz.com.tr/wp-content/uploads/Pantone_SkinTones.htm
+##seems like a bad list..
 	(255,223,196): 'db181',
 	(240,213,190): 'db182',
 	(238,206,179): 'db183',
@@ -97,12 +103,11 @@ colours = {
 	
 }
 
+
+
+#Dont think this does anything..
 colour_type = colours.get(pixels, 'no match') 
-
-
-match = 0 #default value
-
-for x in pixels:
+####***OLD VERSION KEPT FOR POSTERITY***########
 #	print pixel #used to ensure pixels are in the (x, x ,x) format
 #	colour_type = colours.get(pixel, 'no match')
 #	print colour_type #printing either 'no match' or one of the dictionary names(w1,c,asian)
@@ -112,10 +117,17 @@ for x in pixels:
 #	if(match >= 5):
 #		"We have enough evidence to prove this______"
 #		break
+####***OLD VERSION END***########################
 
+
+match = 0 #default value
+#Run the pixfun function on every value in pixels array.  The function returns 1 if it finds a postive skin pixel
+#Increment match evertime.  At the end print it out
+for x in pixels:
 	pron = pixfun(x)
 	if pron == 1:
 		match = match + 1
 
 print "Matches", match
 print "Total Pixels:", len(pixels)
+print "The Percentage of skin showing in your image: ", match/len(pixels)
