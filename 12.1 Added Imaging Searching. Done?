@@ -1,0 +1,245 @@
+#!/usr/bin/python
+import Image
+import fnmatch
+import os
+import platform
+import pprint
+
+#colour dictionary of skin tones
+colours = {
+	(245, 245, 245): 'w1',
+	(190, 105, 85):	 'w2',
+	(129, 63, 49):	'w3',
+	(250, 217, 160): 'w4',
+	(247, 217, 214): 'lc',
+	(240, 186, 173): 'c',
+	(212, 128, 107): 'dc',
+	(235, 178, 133): 'asian',
+	(195, 116,  77): 'lb',
+	#############
+##http://www.makehuman.org/forum/viewtopic.php?f=8&t=1529	
+	(69,  42,  29): 'db',
+	(45, 34, 30): 'db1',
+	(60, 46, 40): 'db2',
+	(75, 57, 50): 'db3',
+	(90, 69, 60): 'db4',
+	(105, 80, 70): 'db5',
+	(120, 92, 80): 'db6',
+	(135, 103, 90): 'db7',
+	(150, 114, 100): 'db8',
+	(165, 126, 110): 'db9',
+	(180, 138, 120): 'db10',
+	(195, 149, 130): 'db11',
+	(210, 161, 140): 'db12',
+	(225, 172, 150): 'db13',
+	(240, 184, 160): 'db14',
+	(255, 195, 170): 'db15',
+	(255, 206, 180): 'db16',
+	(255, 218, 190): 'db17',
+	(255, 229, 200): 'db18',
+###############
+##http://www.erdemyilmaz.com.tr/wp-content/uploads/Pantone_SkinTones.htm
+##seems like a bad list..
+	(255,223,196): 'db181',
+	(240,213,190): 'db182',
+	(238,206,179): 'db183',
+	(225,184,153): 'db184',
+	(229,194,152): 'db185',
+	(255,220,178): 'db186',
+	(229,184,143): 'db187',
+	(229,160,115): 'db188',
+	(231,158,109): 'db189',
+	(219,144,101): 'db1810',
+	(206,150,124): 'db1811',
+	(198,120,86): 'db1812',
+	(186,108,73): 'db1813',
+	(165,114,87): 'db1814',
+	(240,200,201): 'db1815',
+	(221,168,160): 'db1816',
+	(185,124,109): 'db1817',
+	(168,117,108): 'db1818',
+	(173,100,82): 'db1819',
+	(92,56,54): 'db1820',
+	(203,132,66): 'db1821',
+	(189,114,60): 'db1822',
+	(112,65,57): 'db1823',
+	(163,134,106): 'db1824',
+	(135,4,0): 'db1825',
+	(113,1,1): 'db1826',
+	(67,0,0): 'db1827',
+	(91,0,1): 'db1828',
+	(48,46,46): 'db1829',
+
+	######################
+	##http://www.photokaboom.com/photography/learn/Photoshop_Elements/color_correction/skin_tone/1_skin_tone_samples.htm
+
+	(255,223,196): 'db21',
+	(255,220,178): 'db22',
+	(253,228,200): 'db23',
+	(240,213,190): 'db24',
+	(240,200,201): 'db25',
+	(238,206,179): 'db26',
+	(234,189,157): 'db27',
+	(231,158,109): 'db28',
+	(229,194,152): 'db29',
+	(229,184,143): 'db20',
+	(229,160,115): 'db211',
+	(227,194,124): 'db212',
+	(225,184,153): 'db213',
+	(224,177,132): 'db214',
+	(223,166,117): 'db215',
+	(222,171,127): 'db216',
+	(221,168,160): 'db217',
+	(219,144,101): 'db218',
+	(208,146,110): 'db219',
+	(206,150,124): 'db220',
+	(203,132,66): 'db221',
+	(198,120,86): 'db222',
+	(189,114,60): 'db223',
+	(189,151,120): 'db224',
+	(186,108,73): 'db225',
+	(185,124,109): 'db226',
+	(173,100,82): 'db227',
+	(168,117,108): 'db228',
+	(165,114,87): 'db229',
+	(165,57,0): 'db230',
+	(163,134,106): 'db231',
+	(148,10,0): 'db232',
+	(135,4,0): 'db233',
+	(123,0,0): 'db234',
+	(113,1,1): 'db235',
+	(112,60,57): 'db236',
+	(100,25,0): 'db237',
+	(92,56,54): 'db238',
+	(90,0,1): 'db239',
+	(67,0,0): 'db240',
+	(56,0,0): 'db241',
+	(48,46,46): 'db242',
+
+############http://www.pbase.com/johnsgallery/image/30515338.jpg
+	(255,220,177): 'db31',
+	(229,194,152): 'db32',
+	(228,185,142): 'db33',
+	(226,185,143): 'db34',
+	(227,161,115): 'db35',
+	(217,145,100): 'db36',
+	(204,132,67): 'db37',
+	(199,122,88): 'db38',
+	(165,57,0): 'db39',
+	(134,4,0): 'db310',
+	(113,2,0): 'db311',
+	(68,0,0): 'db312',
+	(255,224,196): 'db313',
+	(238,207,180): 'db314',
+	(222,171,127): 'db315',
+	(224,177,132): 'db316',
+	(223,166,117): 'db317',
+	(190,114,60): 'db318',
+	(100,25,0): 'db319',
+	(91,0,0): 'db320',
+	(253,228,200): 'db321',
+	(239,214,189): 'db322',
+	(234,189,157): 'db323',
+	(227,194,124): 'db324',
+	(223,185,151): 'db325',
+	(208,146,110): 'db326',
+	(189,151,120): 'db327',
+	(187,109,74): 'db328',
+	(148,10,0): 'db329',
+	(225,173,164): 'db330',
+	(165,136,105): 'db331',
+	(123,0,0): 'db332',
+	(114,0,4): 'db333',
+	(56,0,0): 'db334',
+
+
+		
+	(0,   0,   0): 'test'
+	
+}
+
+
+
+
+#Spread function.
+#Checks each item from colours dictionary (Skin tones we flag as 'porn')
+#Checks each element of color dictionary separately, further divides
+#each element by r-g-b
+#each element divided by tuple split 
+def pixfun(pix):
+	spread = 10
+	for color in colours:
+		if pix[0]<=(color[0] + spread) and pix[0]>=(color[0] - spread) \
+			and pix[1]<=(color[1] + spread) and pix[1]>=(color[1] - spread) \
+				and pix[2]<=(color[2] + spread) and pix[2]>=(color[2] - spread):
+			return 1
+
+
+
+#Here we determine the directory to crawl through for pictures
+#images1 is array of test extentions
+#matches1 will become array of file locations that match extenstions
+images1 = ['*.jpg', '*.jpeg', '*.png'] 
+matches1 = []
+directory = raw_input("What directory do you want to crawl?: ")
+
+for root, dirnames, filenames in os.walk(directory):
+    for extensions in images1:
+	for filename in fnmatch.filter(filenames, extensions):
+	    matches1.append(os.path.join(root, filename))
+
+print "\n"
+
+#All pixel analysis is run on every matched file extention from above
+highpercent = [] #array for high percentage matches
+for piclist in matches1:			
+	# Load image
+	img = Image.open(piclist)
+	pix = img.load()
+
+	#size of image put into variables width/height
+	width, height = img.size #Image size
+
+	pixels = tuple(img.getdata())  #grab all pixel values of image loaded and put into a list of tuples
+
+
+
+
+	#Dont think this does anything..
+	colour_type = colours.get(pixels, 'no match') 
+	####***OLD VERSION KEPT FOR POSTERITY***########
+	#	print pixel #used to ensure pixels are in the (x, x ,x) format
+	#	colour_type = colours.get(pixel, 'no match')
+	#	print colour_type #printing either 'no match' or one of the dictionary names(w1,c,asian)
+	#	if(colour_type != 'no match'):
+	#		match = match + 1 #For every matched pixel, + 1
+
+	#	if(match >= 5):
+	#		"We have enough evidence to prove this______"
+	#		break
+	####***OLD VERSION END***########################
+
+
+	match = 0 
+	#Run the pixfun function on every value in pixels array.  The function returns 1 if it finds a postive skin pixel
+	#Increment match evertime.  At the end print it out
+	for x in pixels:
+		pron = pixfun(x)
+		if pron == 1:
+			match = match + 1
+	
+	print piclist
+	print "Matches", match
+	print "Total Pixels:", len(pixels)
+	fmatch = float(match)
+	ftot = float(len(pixels))
+	print "The Percentage of skin showing in your image: ", round(fmatch/ftot * 100, 1)
+	percent = round(fmatch/ftot * 100, 1)
+	if percent > 45: #If percent is above 45% add to highpercent array
+		highpercent.append(piclist)
+	print "\n"
+
+print "########################"
+print "########################"
+print "High percentage matches include the following files:"
+print '\n'.join(highpercent)
